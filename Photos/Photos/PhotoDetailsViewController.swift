@@ -11,6 +11,7 @@ import UIKit
 class PhotoDetailsViewController: UIViewController {
 
     var photo: Photo!
+    var hearts : [UIImage]!
     
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var username: UILabel!
@@ -31,6 +32,10 @@ class PhotoDetailsViewController: UIViewController {
         dateFormatter.timeStyle = .MediumStyle
         datePosted.text = dateFormatter.stringFromDate(photo.datePosted)
         likes.text = "\(photo.likes) likes"
+        heart.tag = 0
+        hearts = [UIImage]()
+        hearts.append(UIImage(named: "whiteHeart")!)
+        hearts.append(UIImage(named: "redHeart")!)
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,6 +43,11 @@ class PhotoDetailsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func heartClicked(sender: AnyObject) {
+        heart.tag = 1 - heart.tag
+        likes.text = "\(photo.likes + heart.tag) likes"
+        heart.setBackgroundImage(hearts[heart.tag], forState: .Normal)
+    }
 
     /*
     // MARK: - Navigation
