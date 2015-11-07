@@ -9,13 +9,14 @@
 import UIKit
 
 class PhotosCollectionViewController: UICollectionViewController {
+
+    var api = InstagramAPI()
     private let reuseIdentifier = "PhotoCell"
     var photos: [Photo]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let api = InstagramAPI()
+        
         photos = [Photo]()
         api.loadPhotos(didLoadPhotos)
         // FILL ME IN
@@ -34,6 +35,10 @@ class PhotosCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! PhotoCollectionViewCell
         
         loadImageForCell(photos[indexPath.row], imageView: cell.imageView)
+        
+        if indexPath.row > photos.count - 3 {
+            api.loadPhotos(didLoadPhotos)
+        }
         
         return cell
     }
@@ -72,7 +77,7 @@ class PhotosCollectionViewController: UICollectionViewController {
     
     /* Completion handler for API call. DO NOT CHANGE */
     func didLoadPhotos(photos: [Photo]) {
-        self.photos = photos
+        self.photos.appendContentsOf(photos)
         self.collectionView!.reloadData()
     }
     
