@@ -12,6 +12,8 @@ import UIKit
 class Photo {
     /* The number of likes the photo has. */
     var likes : Int!
+    /* The date the photo was posted. */
+    var datePosted: NSDate!
     /* The string of the url to the photo file. */
     var thumbnailURL : String!
     /* The thumbnail of the photo. */
@@ -58,6 +60,10 @@ class Photo {
                 username = j
             }
         }
+        
+        //datePosted["created_time"]
+        let i = data["created_time"] as! String
+        datePosted = NSDate(timeIntervalSince1970: Double(i)!)
     }
     
     func loadThumbnail() -> UIImage {

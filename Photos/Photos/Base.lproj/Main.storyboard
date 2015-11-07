@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Photos Collection View Controller-->
@@ -40,6 +41,7 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="imageView" destination="uOs-4U-BOg" id="nQV-m4-dl4"/>
+                                    <segue destination="S2o-iC-olh" kind="show" identifier="PhotoDetailsSegue" id="fKC-n5-7zo"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -53,6 +55,73 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iGL-zy-oWw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2573" y="-519"/>
+        </scene>
+        <!--Photo Details View Controller-->
+        <scene sceneID="CvQ-bD-2ZN">
+            <objects>
+                <viewController id="S2o-iC-olh" customClass="PhotoDetailsViewController" customModule="Photos" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2Qg-7U-FsB"/>
+                        <viewControllerLayoutGuide type="bottom" id="2di-jI-xlU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Jhv-LW-mS7">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1AW-2t-yOf">
+                                <rect key="frame" x="20" y="72" width="560" height="398"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dXp-Gn-vdi">
+                                <rect key="frame" x="20" y="478" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Date Posted" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SZc-UA-3Yc">
+                                <rect key="frame" x="20" y="507" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Likes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9e-dj-WY3">
+                                <rect key="frame" x="20" y="545" width="236" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VAm-fD-ySP">
+                                <rect key="frame" x="269" y="540" width="46" height="30"/>
+                                <state key="normal" title="Heart"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="VAm-fD-ySP" firstAttribute="leading" secondItem="U9e-dj-WY3" secondAttribute="trailing" constant="13" id="0wr-GH-U6R"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="SZc-UA-3Yc" secondAttribute="leading" id="1Ys-e6-kuC"/>
+                            <constraint firstItem="1AW-2t-yOf" firstAttribute="top" secondItem="2Qg-7U-FsB" secondAttribute="bottom" constant="8" id="QwI-7x-xrS"/>
+                            <constraint firstItem="2di-jI-xlU" firstAttribute="top" secondItem="U9e-dj-WY3" secondAttribute="bottom" constant="34" id="Umq-NU-YAo"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="1AW-2t-yOf" secondAttribute="leading" id="f1j-L7-U6e"/>
+                            <constraint firstItem="1AW-2t-yOf" firstAttribute="centerX" secondItem="Jhv-LW-mS7" secondAttribute="centerX" id="fyi-RA-ka7"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="U9e-dj-WY3" secondAttribute="leading" id="ggD-Mt-ErG"/>
+                            <constraint firstItem="dXp-Gn-vdi" firstAttribute="top" secondItem="1AW-2t-yOf" secondAttribute="bottom" constant="15" id="hGb-ig-u9h"/>
+                            <constraint firstItem="U9e-dj-WY3" firstAttribute="top" secondItem="SZc-UA-3Yc" secondAttribute="bottom" constant="17" id="i95-Fv-r67"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="1AW-2t-yOf" secondAttribute="trailing" id="itd-2c-NR2"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="dXp-Gn-vdi" secondAttribute="leading" id="sB0-pN-D52"/>
+                            <constraint firstItem="SZc-UA-3Yc" firstAttribute="top" secondItem="dXp-Gn-vdi" secondAttribute="bottom" constant="8" id="voV-Ix-0dj"/>
+                            <constraint firstItem="2di-jI-xlU" firstAttribute="top" secondItem="VAm-fD-ySP" secondAttribute="bottom" constant="30" id="y5Y-HW-IVG"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="datePosted" destination="SZc-UA-3Yc" id="Agz-hy-yKz"/>
+                        <outlet property="heart" destination="VAm-fD-ySP" id="T5l-dW-Xa9"/>
+                        <outlet property="imageView" destination="1AW-2t-yOf" id="T9H-hj-ZOF"/>
+                        <outlet property="likes" destination="U9e-dj-WY3" id="eir-YF-1xU"/>
+                        <outlet property="username" destination="dXp-Gn-vdi" id="vsq-fR-8pA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gO6-GU-VqH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3427" y="-519"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oFE-m2-sde">

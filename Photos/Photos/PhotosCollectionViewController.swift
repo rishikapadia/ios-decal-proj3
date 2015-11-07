@@ -36,7 +36,7 @@ class PhotosCollectionViewController: UICollectionViewController {
         
         loadImageForCell(photos[indexPath.row], imageView: cell.imageView)
         
-        if indexPath.row > photos.count - 3 {
+        if indexPath.row > photos.count - 4 {
             api.loadPhotos(didLoadPhotos)
         }
         
@@ -44,8 +44,12 @@ class PhotosCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        // Segue
+        
         print("Selected row \(indexPath.row) out of \(photos.count - 1)")
+        
+        // Segue
+        
+        
         return
     }
     
@@ -54,14 +58,6 @@ class PhotosCollectionViewController: UICollectionViewController {
         let photo =  photos[indexPath.row]
         let thumbnail = photo.loadThumbnail()
         return thumbnail.size
-        
-        /*if let thumbnail = photo.thumbnail {
-            var size = thumbnail.size
-            size.width += 10
-            size.height += 10
-            return size
-        }
-        return CGSize(width: 100, height: 100)*/
     }
 
     /* 
@@ -81,5 +77,14 @@ class PhotosCollectionViewController: UICollectionViewController {
         self.collectionView!.reloadData()
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "PhotoDetailsSegue" {
+            if let destVC = segue.destinationViewController as? PhotoDetailsViewController {
+                if let ind = collectionView?.indexPathsForSelectedItems()?[0].row {
+                    destVC.photo = photos[ind]
+                }
+            }
+        }
+    }
 }
 
