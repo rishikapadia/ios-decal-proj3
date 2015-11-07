@@ -13,20 +13,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rdU-fP-a12">
-                            <size key="itemSize" width="50" height="50"/>
+                            <size key="itemSize" width="200" height="200"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="D2N-rQ-1BW">
-                                <rect key="frame" x="0.0" y="64" width="50" height="50"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCell" id="D2N-rQ-1BW" customClass="PhotoCollectionViewCell" customModule="Photos" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uOs-4U-BOg">
+                                            <rect key="frame" x="8" y="8" width="184" height="184"/>
+                                        </imageView>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="uOs-4U-BOg" secondAttribute="bottom" constant="5" id="02y-nY-jv4"/>
+                                    <constraint firstAttribute="trailing" secondItem="uOs-4U-BOg" secondAttribute="trailing" constant="5" id="ZAm-g0-1k0"/>
+                                    <constraint firstItem="uOs-4U-BOg" firstAttribute="top" secondItem="D2N-rQ-1BW" secondAttribute="top" constant="5" id="h9t-Aw-Kz5"/>
+                                    <constraint firstItem="uOs-4U-BOg" firstAttribute="leading" secondItem="D2N-rQ-1BW" secondAttribute="leading" constant="5" id="l1z-yS-8t3"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="imageView" destination="uOs-4U-BOg" id="nQV-m4-dl4"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
