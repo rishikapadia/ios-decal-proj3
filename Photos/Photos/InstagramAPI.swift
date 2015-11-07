@@ -9,6 +9,9 @@
 import Foundation
 
 class InstagramAPI {
+    
+    var completion: (([Photo]) -> Void)!
+    
     /* Connects with the Instagram API and pulls resources from the server. */
     func loadPhotos(completion: (([Photo]) -> Void)!) {
         /* 
@@ -23,24 +26,45 @@ class InstagramAPI {
          *       d. Wait for completion of Photos array
          */
         // FILL ME IN
-        var url: NSURL
+        let url = NSURLRequest(URL: Utils.getPopularURL())
+        self.completion = completion
+        
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(url, completionHandler: myCompletionHandler)
 
-        var task = NSURLSession.sharedSession().dataTaskWithURL(url!) {
-            (data, response, error) -> Void in
-            if error == nil {
-                var photos: [Photo]!
-                // FILL ME IN
-                
-                
-                // DO NOT CHANGE BELOW
-                let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-                dispatch_async(dispatch_get_global_queue(priority, 0)) {
-                    dispatch_async(dispatch_get_main_queue()) {
-                        completion(photos)
-                    }
-                }
-
+        task.resume()
+    }
+    
+    func myCompletionHandler(data: NSData?, response: NSURLResponse?, error: NSError?) {
+        if error == nil {
+            var photos: [Photo]!
+            // FILL ME IN
+            var jsonDict: NSDictionary
+            
+            do {
+                jsonDict = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+            } catch let parseError {
+                print(parseError)
+                let jsonStr = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                print("Error could not parse JSON: '\(jsonStr)'")
+                return
             }
+            //photos = (jsonDict.objectForKey("photos") as? NSDictionary)!
+            
+            let images = jsonDict["data"] as! NSArray
+            photos = [Photo]()
+            for item in images {
+                photos.append(Photo(data: item as! NSDictionary))
+            }
+            
+            // DO NOT CHANGE BELOW
+            let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+            dispatch_async(dispatch_get_global_queue(priority, 0)) {
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.completion(photos)
+                }
+            }
+        } else {
+            print(error!.localizedDescription)
         }
     }
 }

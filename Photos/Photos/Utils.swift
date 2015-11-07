@@ -18,13 +18,13 @@ class Utils {
 
     class func getPopularURL() -> NSURL {
         let cid = clientID()
-        let urlStr = "https://api.instagram.com/v1/media/popular?\(cid)"
+        let urlStr = "https://api.instagram.com/v1/media/popular?client_id=\(cid)"
         return NSURL(string: urlStr)!
     }
     
     class func getHashtagURL(hashtag: String) -> NSURL {
         let cid = clientID()
-        let urlStr = "https://api.instagram.com/v1/tags/\(hashtag)/media/recent?\(cid)"
+        let urlStr = "https://api.instagram.com/v1/tags/\(hashtag)/media/recent?client_id=\(cid)"
         return NSURL(string: urlStr)!
     }
 }

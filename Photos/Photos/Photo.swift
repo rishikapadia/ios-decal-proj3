@@ -19,6 +19,28 @@ class Photo {
     /* Parses a NSDictionary and creates a photo object. */
     init (data: NSDictionary) {
         // FILL ME IN
-    }
 
+        //likes = data["likes"]["count"]
+        if let i = data["likes"] as! NSDictionary! {
+            if let j = i["count"] as! Int! {
+                likes = j
+            }
+        }
+        
+        //url = data["images"]["thumbnail"]["url"]
+        if let i = data["images"] as! NSDictionary! {
+            if let j = i["thumbnail"] as! NSDictionary! {
+                if let k = j["url"] as! String! {
+                    url = k
+                }
+            }
+        }
+        
+        //username = data["caption"]["from"]["username"]
+        if let i = data["user"] as! NSDictionary! {
+            if let j = i["username"] as! String! {
+                username = j
+            }
+        }
+    }
 }
